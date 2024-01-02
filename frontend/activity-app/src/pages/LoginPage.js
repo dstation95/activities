@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
-import { useAuth } from './path/to/AuthContext'
+import { useAuth } from '../../AuthContext'
 import axios from "axios";
 
 const LoginPage = () => {
@@ -18,7 +18,6 @@ const LoginPage = () => {
       });
       console.log(response.data);
       await signIn(response.data.token);
-      // Navigate to the home page or other secured pages
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error', error);
