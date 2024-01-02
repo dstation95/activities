@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Button, Text } from 'react-native';
+import { useAuth } from './path/to/AuthContext'
 import axios from "axios";
 
 const LoginPage = () => {
@@ -7,20 +8,22 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { signIn } = useAuth();
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/sign-in", {
+      const response = await axios.post('http://localhost:8000/sign-in', {
         email,
         password,
       });
       console.log(response.data);
-      localStorage.setItem('token', response.data.token); 
+      await signIn(response.data.token);
+      // Navigate to the home page or other secured pages
     } catch (error) {
-      setError("Login failed. Please check your credentials.");
-      console.error("Login error", error);
+      setError('Login failed. Please check your credentials.');
+      console.error('Login error', error);
     }
   };
-
   return (
     <View style={styles.container}>
       <TextInput

@@ -14,13 +14,17 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppStack from './src/navigators/AppStack';
+import { AuthProvider } from './path/to/AuthContext';
 import { StyleSheet } from 'react-native';
 import 'react-native-gesture-handler';
 
 export default function App() {
   return (
+    
     <NavigationContainer>
+          <AuthProvider>
       <AppStack />
+      </AuthProvider>
     </NavigationContainer>
   );
 }
